@@ -48,11 +48,11 @@
             </div>
         </div>
         <div class="col-md-4 mb-3">
-            <div class="card h-100 {% if not is_granted('ROLE_ADMIN') and not is_granted('ROLE_TECHNICIAN') %}disabled{% endif %}">
+            <div class="card h-100 {% if not is_granted('ROLE_MANAGER') and not is_granted('ROLE_TECHNICIAN') %}disabled{% endif %}">
                 <div class="card-body">
                     <h5 class="card-title">Manage Car Servicing</h5>
                     <p class="card-text">Schedule, update, or delete car service appointments.</p>
-                    <a href="{{ path('admin_service_requests') }}" class="btn btn-primary {% if not is_granted('ROLE_ADMIN') and not is_granted('ROLE_TECHNICIAN') %}disabled{% endif %}">Manage Servicing</a>
+                    <a href="{{ path('admin_service_requests') }}" class="btn btn-primary {% if not is_granted('ROLE_MANAGER') and not is_granted('ROLE_TECHNICIAN') %}disabled{% endif %}">Manage Servicing</a>
                 </div>
             </div>
         </div>

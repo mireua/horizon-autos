@@ -2,26 +2,34 @@
 
 namespace App\Controller;
 
+use App\Entity\Car;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Doctrine\ORM\EntityManagerInterface;
 
 #[Route('/test-drive')]
 class TestDriveController extends AbstractController
 {
+    private $entityManager;
+
+    public function __construct(EntityManagerInterface $entityManager)
+    {
+        $this->entityManager = $entityManager;
+    }
+
     #[Route('/', name: 'test_drive', methods: ['GET', 'POST'])]
     public function book(Request $request): Response
     {
-        // Placeholder vehicle data - you would typically fetch this from a database
-        $vehicles = [
-            ['model' => 'BMW 3 Series'],
-            ['model' => 'Audi A4'],
-            ['model' => 'Volkswagen Golf'],
-            ['model' => 'Nissan Altima'],
-            ['model' => 'Toyota Camry'],
-            ['model' => 'Honda Accord'],
-        ];
+        // Retrieve vehicles from the database
+        $vehicles = $this->entityManager->getRepository(Car::class)->findAll();
+
+        // Check if a make filter is applied
+        $make = $request->query->get('make');
+        if ($make) {
+            $vehicles = $this->entityManager->getRepository(Car::class)->findBy(['make' => $make]);
+        }
 
         if ($request->isMethod('POST')) {
             // Handle the booking logic here
@@ -40,3 +48,4 @@ class TestDriveController extends AbstractController
         ]);
     }
 }
+
