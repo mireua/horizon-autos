@@ -3,48 +3,73 @@
 {% block title %}Horizon Autos{% endblock %}
 
 {% block stylesheets %}
-     <link rel="stylesheet" href="{{ asset('styles/homepage.css') }}">
+    <link rel="stylesheet" href="{{ asset('styles/homepage.css') }}">
+    <!-- Bootstrap Icons -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
 {% endblock %}
 
 {% block body %}
-<div class="hero d-flex align-items-center">
+<div class="hero d-flex align-items-center justify-content-center flex-column">
     <div class="hero-text text-center">
         <h1 class="display-3 fw-bold">Welcome to Horizon Autos!</h1>
         <p class="lead">Explore top-quality vehicles and unmatched service.</p>
+        <!-- Search Bar -->
+        <form class="d-flex justify-content-center mt-4" role="search">
+            <input class="form-control me-2" type="search" placeholder="Search for a car" aria-label="Search" style="width: 50%;">
+            <button class="btn btn-outline-primary" type="submit">Search</button>
+        </form>
     </div>
 </div>
 
-<div class="container feature"> <!-- Changed from container-fluid to container -->
+<div class="container-fluid feature"> <!-- Use "container" for a fixed width or "container-fluid" for full width -->
     <div class="row justify-content-center">
-        <div class="col-md-10">
-            <div class="row">
-                <div class="col-md-4 mb-4">
-                    <div class="feature-card p-4">
-                        <h2>Vehicle Index</h2>
-                        <p>Discover the newest additions to our lineup.</p>
-                        <a class="btn btn-primary" href="{{ path('veh_index') }}" role="button">View Index »</a>
-                    </div>
-                </div>
-                <div class="col-md-4 mb-4">
-                    <div class="feature-card p-4">
-                        <h2>Not Sure Yet?</h2>
-                        <p>Not sure on the big commitment on the auto? Book a test drive in with us.</p>
-                        <a class="btn btn-primary" href="{{ path('test_drive') }}" role="button">Learn More »</a>
-                    </div>
-                </div>
-                <div class="col-md-4 mb-4">
-                    <div class="feature-card p-4">
-                        <h2>Car Service</h2>
-                        <p>Bought with us and you need an oil change before your NCT?</p>
-                        <a class="btn btn-primary" href="#" role="button">Contact Us »</a>
-                    </div>
-                </div>
+        <div class="col-md-3 mb-4"> <!-- Adjusted to col-md-3 -->
+            <div class="feature-card p-4">
+                <h2>Vehicle Index</h2>
+                <p>Need an upgrade? Discover the newest additions to our lineup.</p>
+                <a class="btn btn-primary" href="{{ path('veh_index') }}" role="button">View Index »</a>
+            </div>
+        </div>
+        <div class="col-md-3 mb-4"> <!-- Adjusted to col-md-3 -->
+            <div class="feature-card p-4">
+                <h2>Not Sure Yet?</h2>
+                <p>Not sure on the big commitment on the car? Book a test drive with us.</p>
+                <a class="btn btn-primary" href="{{ path('test_drive') }}" role="button">Learn More »</a>
+            </div>
+        </div>
+        <div class="col-md-3 mb-4"> <!-- Adjusted to col-md-3 -->
+            <div class="feature-card p-4">
+                <h2>Car Service</h2>
+                <p>Bought with us and you need an oil change before your NCT?</p>
+                <a class="btn btn-primary" href="#" role="button">Contact Us »</a>
             </div>
         </div>
     </div>
 </div>
 
-<div class="footer">
-    <p>© {{ "now"|date("Y") }} Car Dealership. All rights reserved.</p>
+<div class="container-fluid footer">
+    <div class="row text-white py-4">
+        <div class="col-md-4">
+            <h3><i class="bi bi-geo-alt-fill"></i> Location</h3>
+            <p>Blanchardstown Rd N, Blanchardstown, Dublin, D15 YV78</p>
+        </div>
+        <div class="col-md-4">
+            <h3><i class="bi bi-envelope-fill"></i> Contact</h3>
+            <p>Email: info@horizonautos.com<br>Phone: (01) 220 5000</p>
+        </div>
+        <div class="col-md-4">
+            <h3><i class="bi bi-people-fill"></i> Follow Us</h3>
+            <ul class="list-unstyled">
+                <li><a href="https://www.facebook.com"><i class="bi bi-facebook"></i> Facebook</a></li>
+                <li><a href="https://www.twitter.com"><i class="bi bi-twitter"></i> Twitter</a></li>
+                <li><a href="https://www.instagram.com"><i class="bi bi-instagram"></i> Instagram</a></li>
+            </ul>
+        </div>
+    </div>
+    <div class="row text-white">
+        <div class="col-md-12">
+            <p class="text-center">© {{ "now"|date("Y") }} Horizon Autos. All rights reserved.</p>
+        </div>
+    </div>
 </div>
 {% endblock %}

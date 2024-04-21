@@ -1,20 +1,61 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello AdminController!{% endblock %}
+{% block title %}Admin Dashboard{% endblock %}
+
+{% block stylesheets %}
+    {{ parent() }}
+    <link rel="stylesheet" href="{{ asset('styles/adminpanel.css') }}">  {# Ensure you link to your CSS correctly #}
+{% endblock %}
 
 {% block body %}
-<style>
-    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
-    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
-</style>
-
-<div class="example-wrapper">
-    <h1>Hello {{ controller_name }}! ✅</h1>
-
-    This friendly message is coming from:
-    <ul>
-        <li>Your controller at <code><a href="{{ '/Users/Computer/Downloads/crud-quickstart/src/Controller/AdminController.php'|file_link(0) }}">src/Controller/AdminController.php</a></code></li>
-        <li>Your template at <code><a href="{{ '/Users/Computer/Downloads/crud-quickstart/templates/admin/index.html.twig'|file_link(0) }}">templates/admin/index.html.twig</a></code></li>
-    </ul>
+<div class="container mt-5">
+    <h1 class="mb-4">Admin Dashboard</h1>
+    <div class="row">
+        <div class="col-md-4 mb-3">
+            <div class="card h-100 {% if not is_granted('ROLE_MANAGER') %}disabled{% endif %}">
+                <div class="card-body">
+                    <h5 class="card-title">Manage Accounts</h5>
+                    <p class="card-text">Create, update, or delete user accounts.</p>
+                    <a href="{{ path('admin_accounts') }}" class="btn btn-primary {% if not is_granted('ROLE_MANAGER') %}disabled{% endif %}">Go to Accounts</a>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4 mb-3">
+            <div class="card h-100 {% if not is_granted('ROLE_MANAGER') %}disabled{% endif %}">
+                <div class="card-body">
+                    <h5 class="card-title">Manage Car Listings</h5>
+                    <p class="card-text">Add, edit, or remove car listings from the inventory.</p>
+                    <a href="{{ path('admin_car_listings') }}" class="btn btn-primary {% if not is_granted('ROLE_MANAGER') %}disabled{% endif %}">Manage Listings</a>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4 mb-3">
+            <div class="card h-100 {% if not is_granted('ROLE_MANAGER') and not is_granted('ROLE_SALESPERSON') %}disabled{% endif %}">
+                <div class="card-body">
+                    <h5 class="card-title">View Test Drives</h5>
+                    <p class="card-text">Schedule and manage upcoming test drives.</p>
+                    <a href="{{ path('admin_test_drives') }}" class="btn btn-primary {% if not is_granted('ROLE_MANAGER') and not is_granted('ROLE_SALESPERSON') %}disabled{% endif %}">View Test Drives</a>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4 mb-3">
+            <div class="card h-100 {% if not is_granted('ROLE_MANAGER') and not is_granted('ROLE_SALESPERSON') %}disabled{% endif %}">
+                <div class="card-body">
+                    <h5 class="card-title">View Financing Requests</h5>
+                    <p class="card-text">Review and process financing applications.</p>
+                    <a href="{{ path('admin_financing') }}" class="btn btn-primary {% if not is_granted('ROLE_MANAGER') and not is_granted('ROLE_SALESPERSON') %}disabled{% endif %}">View Financing</a>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4 mb-3">
+            <div class="card h-100 {% if not is_granted('ROLE_ADMIN') and not is_granted('ROLE_TECHNICIAN') %}disabled{% endif %}">
+                <div class="card-body">
+                    <h5 class="card-title">Manage Car Servicing</h5>
+                    <p class="card-text">Schedule, update, or delete car service appointments.</p>
+                    <a href="{{ path('admin_service_requests') }}" class="btn btn-primary {% if not is_granted('ROLE_ADMIN') and not is_granted('ROLE_TECHNICIAN') %}disabled{% endif %}">Manage Servicing</a>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
 {% endblock %}

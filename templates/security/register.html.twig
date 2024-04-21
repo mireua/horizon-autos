@@ -1,0 +1,28 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Register{% endblock %}
+
+{% block stylesheets %}
+<link rel="stylesheet" href="{{ asset('styles/login.css') }}">
+{% endblock %}
+
+{% block body %}
+<div class="center-screen">
+    <div class="login-box">
+        <h1 class="h3 mb-3 font-weight-normal text-center">Register</h1>
+        {{ form_start(registrationForm) }}
+            {{ form_row(registrationForm.name) }}
+            {{ form_row(registrationForm.email) }}
+            {{ form_row(registrationForm.phone) }}
+            {{ form_row(registrationForm.password) }}
+            <div class="d-grid gap-2">
+                {{ form_row(registrationForm.register, {'attr': {'class': 'btn btn-lg btn-primary'}}) }}
+            </div>
+            <div class="text-center mt-3">
+                <button type="button" onclick="window.location.href='{{ path('app_login') }}'" class="btn btn-sm btn-link">Already have an account? Log In</button>
+            </div>
+        {{ form_end(registrationForm) }}
+    </div>
+</div>
+{% endblock %}
+
