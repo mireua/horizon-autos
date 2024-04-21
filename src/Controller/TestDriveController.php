@@ -32,7 +32,7 @@ class TestDriveController extends AbstractController
             // Here you would typically save this data to a database and possibly send a confirmation email
 
             $this->addFlash('success', "Your test drive for the $model on $date at $time has been booked successfully.");
-            return $this->redirectToRoute('book_test_drive');
+            return $this->redirectToRoute('test_drive');
         }
 
         return $this->render('testdrive/index.html.twig', [

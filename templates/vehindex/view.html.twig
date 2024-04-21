@@ -1,0 +1,75 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ car.make }} {{ car.model }}{% endblock %}
+
+{% block body %}
+<div class="container mt-5">
+    <div class="row">
+        <div class="col-md-6">
+            <div class="card rounded p-3">
+                <h2>{{ car.make }} {{ car.model }}</h2>
+                <img src="{{ asset('images/cars/' ~ car.image ~ '') }}" class="img-fluid mb-3" alt="Vehicle Image">
+                <p>{{ car.description }}</p>
+                <p><strong>Year:</strong> {{ car.year }}</p>
+                <p><strong>Engine:</strong> {{ car.engine }}</p>
+                <p><strong>Price:</strong> €{{ car.price|number_format(2, '.', ',') }}</p>
+                {% if app.user %}
+                <form action="{{ path('homepage', {'id': car.id}) }}" method="post">
+                    <button type="submit" class="btn btn-primary">Add to Favorites</button>
+                </form>
+                {% endif %}
+            </div>
+        </div>
+        <div class="col-md-6">
+            <!-- Booking panel -->
+            <div class="card mb-3">
+                <div class="card-body">
+                    {% if app.user %}
+                        <!-- Booking form -->
+                        <h5 class="card-title">Book a Test Drive</h5>
+                        <form action="{{ path('homepage') }}" method="post">
+                            <!-- Form fields -->
+                            <div class="mb-3">
+                                <input type="text" class="form-control" name="name" placeholder="Your Name" required value="{{ app.user.name }}" readonly>
+                            </div>
+                            <div class="mb-3">
+                                <input type="email" class="form-control" name="email" placeholder="Your Email" required value="{{ app.user.email }}">
+                            </div>
+                            <div class="mb-3">
+                                <input type="tel" class="form-control" name="phone" placeholder="Your Phone Number" required>
+                            </div>
+                            <button type="submit" class="btn btn-primary">Book Now</button>
+                        </form>
+                    {% else %}
+                        <p class="card-text">Please <a href="{{ path('app_login') }}">log in</a> to book a test drive.</p>
+                    {% endif %}
+                </div>
+            </div>
+            <!-- Finance panel -->
+            <div class="card">
+                <div class="card-body">
+                    {% if app.user %}
+                        <!-- Finance form -->
+                        <h5 class="card-title">Apply for Financing</h5>
+                        <form action="{{ path('homepage') }}" method="post">
+                            <!-- Form fields -->
+                            <div class="mb-3">
+                                <input type="text" class="form-control" name="name" placeholder="Your Name" required value="{{ app.user.name }}" readonly>
+                            </div>
+                            <div class="mb-3">
+                                <input type="email" class="form-control" name="email" placeholder="Your Email" required value="{{ app.user.email }}">
+                            </div>
+                            <div class="mb-3">
+                                <input type="tel" class="form-control" name="phone" placeholder="Your Phone Number" required>
+                            </div>
+                            <button type="submit" class="btn btn-primary">Apply Now</button>
+                        </form>
+                    {% else %}
+                        <p class="card-text">Please <a href="{{ path('app_login') }}">log in</a> to apply for financing.</p>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

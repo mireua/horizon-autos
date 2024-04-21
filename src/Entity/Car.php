@@ -37,6 +37,9 @@ class Car
     #[ORM\Column(type: "text", nullable: true)]
     private ?string $description = null; // Additional details for showroom listings
 
+    #[ORM\Column(nullable: true)]
+    private ?string $image = null; // Image filename
+
     public function getId(): ?int
     {
         return $this->id;
@@ -134,6 +137,18 @@ class Car
     public function setDescription(?string $description): self
     {
         $this->description = $description;
+
+        return $this;
+    }
+
+    public function getImage(): ?string
+    {
+        return $this->image;
+    }
+
+    public function setImage(?string $image): self
+    {
+        $this->image = $image;
 
         return $this;
     }
