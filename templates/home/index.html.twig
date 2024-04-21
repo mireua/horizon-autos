@@ -1,0 +1,50 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Horizon Autos{% endblock %}
+
+{% block stylesheets %}
+     <link rel="stylesheet" href="{{ asset('styles/homepage.css') }}">
+{% endblock %}
+
+{% block body %}
+<div class="hero d-flex align-items-center">
+    <div class="hero-text text-center">
+        <h1 class="display-3 fw-bold">Welcome to Horizon Autos!</h1>
+        <p class="lead">Explore top-quality vehicles and unmatched service.</p>
+    </div>
+</div>
+
+<div class="container feature"> <!-- Changed from container-fluid to container -->
+    <div class="row justify-content-center">
+        <div class="col-md-10">
+            <div class="row">
+                <div class="col-md-4 mb-4">
+                    <div class="feature-card p-4">
+                        <h2>Vehicle Index</h2>
+                        <p>Discover the newest additions to our lineup.</p>
+                        <a class="btn btn-primary" href="{{ path('veh_index') }}" role="button">View Index »</a>
+                    </div>
+                </div>
+                <div class="col-md-4 mb-4">
+                    <div class="feature-card p-4">
+                        <h2>Not Sure Yet?</h2>
+                        <p>Not sure on the big commitment on the auto? Book a test drive in with us.</p>
+                        <a class="btn btn-primary" href="{{ path('test_drive') }}" role="button">Learn More »</a>
+                    </div>
+                </div>
+                <div class="col-md-4 mb-4">
+                    <div class="feature-card p-4">
+                        <h2>Car Service</h2>
+                        <p>Bought with us and you need an oil change before your NCT?</p>
+                        <a class="btn btn-primary" href="#" role="button">Contact Us »</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="footer">
+    <p>© {{ "now"|date("Y") }} Car Dealership. All rights reserved.</p>
+</div>
+{% endblock %}
