@@ -1,0 +1,78 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Pending Test Drive Applications{% endblock %}
+
+{% block stylesheets %}
+    {{ parent() }}
+    <!-- Bootstrap CSS -->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+{% endblock %}
+
+{% block body %}
+<div class="container mt-4">
+    <h1 class="mb-4">Pending Test Drive Applications</h1>
+    <div class="table-responsive">
+        <table class="table table-striped">
+            <thead class="thead-dark">
+                <tr>
+                    <th scope="col">Car</th>
+                    <th scope="col">User</th>
+                    <th scope="col">Requested Date</th>
+                    <th scope="col">Status</th>
+                    <th scope="col">Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for testDrive in testDrives %}
+                    {% if testDrive.status == 'pending' %}
+                        <tr>
+                            <td>{{ testDrive.car.make }} {{ testDrive.car.model }}</td>
+                            <td>{{ testDrive.user.name }}</td>
+                            <td>{{ testDrive.getScheduledTime()|date('Y-m-d') }}</td>
+                            <td>{{ testDrive.status|capitalize }}</td>
+                            <td>
+                                <!-- Button to trigger modal -->
+                                <button type="button" class="btn btn-success" data-toggle="modal" data-target="#approveModal{{ testDrive.id }}">Approve</button>
+                                <form action="{{ path('deny_test_drive', {'id': testDrive.id}) }}" method="post" style="display: inline;">
+                                    <button type="submit" class="btn btn-danger">Deny</button>
+                                </form>
+                            </td>
+                        </tr>
+                        <!-- Modal -->
+                        <div class="modal fade" id="approveModal{{ testDrive.id }}" tabindex="-1" role="dialog" aria-labelledby="approveModalLabel" aria-hidden="true">
+                            <div class="modal-dialog" role="document">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title" id="approveModalLabel">Allocate Time Slot for {{ testDrive.user.name }}</h5>
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                            <span aria-hidden="true">&times;</span>
+                                        </button>
+                                    </div>
+                                    <div class="modal-body">
+                                        <!-- Form to allocate time slot -->
+                                        <form action="{{ path('allocate_time_slot', {'id': testDrive.id}) }}" method="post">
+                                            <div class="form-group">
+                                                <label for="timeSlot">Time Slot for {{ testDrive.getScheduledTime()|date('Y-m-d') }}:</label>
+                                                <input type="time" id="timeSlot" name="timeSlot" class="form-control" required>
+                                            </div>
+                                            <button type="submit" class="btn btn-primary">Allocate</button>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    {% endif %}
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+    <!-- Bootstrap and JavaScript libraries -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+{% endblock %}

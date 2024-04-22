@@ -1,0 +1,58 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Pending Financing Requests{% endblock %}
+
+{% block stylesheets %}
+    {{ parent() }}
+    <!-- Bootstrap CSS -->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+{% endblock %}
+
+{% block body %}
+<div class="container mt-4">
+    <h1 class="mb-4">Pending Financing Requests</h1>
+    <div class="table-responsive">
+        <table class="table table-striped">
+            <thead class="thead-dark">
+                <tr>
+                    <th scope="col">Car</th>
+                    <th scope="col">User</th>
+                    <th scope="col">Amount</th>
+                    <th scope="col">Interest Rate</th>
+                    <th scope="col">Term</th>
+                    <th scope="col">Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for financing in financings %}
+                    {% if financing.status == 'pending' %}
+                        <tr>
+                            <td>{{ financing.car.make }} {{ financing.car.model }}</td>
+                            <td>{{ financing.user.name }}</td>
+                            <td>${{ financing.amount }}</td>
+                            <td>{{ financing.interestRate }}%</td>
+                            <td>{{ financing.term }} months</td>
+                            <td>
+                                <form action="{{ path('approve_financing', {'id': financing.id}) }}" method="post" style="display: inline;">
+                                    <button type="submit" class="btn btn-success">Approve</button>
+                                </form>
+                                <form action="{{ path('deny_financing', {'id': financing.id}) }}" method="post" style="display: inline;">
+                                    <button type="submit" class="btn btn-danger">Deny</button>
+                                </form>
+                            </td>
+                        </tr>
+                    {% endif %}
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+    <!-- Bootstrap and JavaScript libraries -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+{% endblock %}

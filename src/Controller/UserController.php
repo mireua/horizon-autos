@@ -2,11 +2,13 @@
 
 namespace App\Controller;
 
+use Symfony\Component\HttpFoundation\Request;
 use App\Entity\User;
+use App\Entity\Inquiry;
+use App\Entity\Car;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
 use Doctrine\ORM\EntityManagerInterface;
 
 class UserController extends AbstractController
@@ -22,7 +24,6 @@ class UserController extends AbstractController
     #[Route(path: '/myprofile', name: 'user_profile')]
     public function profile(): Response
     {
-
         // Initialize user to null
         $user = null;
 
@@ -38,10 +39,33 @@ class UserController extends AbstractController
         ]);
     }
 
-    #[Route(path: '/inbox', name: 'user_inbox')]
-    public function inbox(): Response
+    #[Route(path: '/inbox/{inquiryId?}', name: 'user_inbox')]  // Optional inquiryId parameter
+    public function inbox(Request $request, ?int $inquiryId = null): Response
     {
-        return $this->render('user/messages.html.twig');
+        $user = $this->getUser();
+
+        // Fetch all inquiries where the user is involved
+        $inquiryRepository = $this->entityManager->getRepository(Inquiry::class);
+        $inquiries = $inquiryRepository->createQueryBuilder('i')
+            ->andWhere('i.sender = :user OR i.receiver = :user')
+            ->setParameter('user', $user)
+            ->getQuery()
+            ->getResult();
+
+        $selectedInquiry = null;
+        if ($inquiryId) {
+            $selectedInquiry = $inquiryRepository->find($inquiryId);
+            if (!$selectedInquiry) {
+                $this->addFlash('error', 'Inquiry not found.');
+                return $this->redirectToRoute('user_inbox');
+            }
+        }
+
+        return $this->render('user/messages.html.twig', [
+            'inquiries' => $inquiries,
+            'selectedInquiry' => $selectedInquiry,
+            'user' => $user,
+        ]);
     }
 
     #[Route(path: '/orders', name: 'user_orders')]

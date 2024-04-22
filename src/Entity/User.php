@@ -4,6 +4,8 @@ namespace App\Entity;
 
 use App\Repository\UserRepository;
 use Doctrine\ORM\Mapping as ORM;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
 
@@ -24,7 +26,6 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column(type: "json")]
     private array $roles = [];
 
-    // Adding new fields
     #[ORM\Column(type: "string", length: 255, nullable: true)]
     private ?string $name = null;
 
@@ -34,7 +35,14 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column(type: "string", length: 20, nullable: true)]
     private ?string $phone = null;
 
-    // Getters and Setters
+    #[ORM\OneToMany(mappedBy: 'sender', targetEntity: Inquiry::class, cascade: ['persist', 'remove'], orphanRemoval: true)]
+    private $sentInquiries;
+
+    public function __construct()
+    {
+        $this->sentInquiries = new ArrayCollection();
+    }
+
     public function getId(): ?int
     {
         return $this->id;
@@ -65,7 +73,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function getRoles(): array
     {
         $roles = $this->roles;
-        // guarantee every user at least has ROLE_USER
+        // Guarantee every user at least has ROLE_USER
         $roles[] = 'ROLE_USER';
         return array_unique($roles);
     }
@@ -78,12 +86,12 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
     public function getSalt(): ?string
     {
-        return null; // not needed when using modern algorithms
+        return null; // Not needed for modern password hashing
     }
 
     public function eraseCredentials(): void
     {
-        // no-op
+        // No-op
     }
 
     public function getUserIdentifier(): string
@@ -121,6 +129,36 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function setPhone(?string $phone): self
     {
         $this->phone = $phone;
+        return $this;
+    }
+
+    /**
+     * @return Collection|Inquiry[]
+     */
+    public function getSentInquiries(): Collection
+    {
+        return $this->sentInquiries;
+    }
+
+    public function addSentInquiry(Inquiry $inquiry): self
+    {
+        if (!$this->sentInquiries->contains($inquiry)) {
+            $this->sentInquiries[] = $inquiry;
+            $inquiry->setSender($this);
+        }
+
+        return $this;
+    }
+
+    public function removeSentInquiry(Inquiry $inquiry): self
+    {
+        if ($this->sentInquiries->removeElement($inquiry)) {
+            // Set the owning side to null (unless already changed)
+            if ($inquiry->getSender() === $this) {
+                $inquiry->setSender(null);
+            }
+        }
+
         return $this;
     }
 }

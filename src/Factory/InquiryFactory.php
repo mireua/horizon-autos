@@ -8,10 +8,11 @@ use App\Entity\Car;
 
 class InquiryFactory
 {
-    public static function create(User $user, string $message, ?Car $car = null): Inquiry
+    public static function create(User $sender, User $receiver, string $message, ?Car $car = null): Inquiry
     {
         $inquiry = new Inquiry();
-        $inquiry->setUser($user);
+        $inquiry->setSender($sender);
+        $inquiry->setReceiver($receiver);
         $inquiry->setMessage($message);
         $inquiry->setCar($car);
         

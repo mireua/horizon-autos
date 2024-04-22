@@ -13,5 +13,4 @@ class InquiryRepository extends ServiceEntityRepository
         parent::__construct($registry, Inquiry::class);
     }
 
-    // Additional methods can be added here, e.g., findByUser(), findByCar(), etc.
 }

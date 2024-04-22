@@ -17,10 +17,10 @@ class Sale
     private ?Car $car = null;
 
     #[ORM\ManyToOne(targetEntity: User::class)]
-    private ?User $user = null; // Changed from Customer to User to accommodate the unified User entity
+    private ?User $user = null; 
 
     #[ORM\ManyToOne(targetEntity: User::class)]
-    private ?User $salesperson = null; // Optional, for tracking the salesperson involved
+    private ?User $salesperson = null;
 
     #[ORM\Column(type: "datetime")]
     private ?\DateTimeInterface $date = null;

@@ -14,8 +14,12 @@ class Inquiry
     private ?int $id = null;
 
     #[ORM\ManyToOne(targetEntity: User::class)]
-    #[ORM\JoinColumn(nullable: false)]
-    private ?User $user;
+    #[ORM\JoinColumn(name: "sender_id", referencedColumnName: "id", nullable: false)]
+    private ?User $sender;
+
+    #[ORM\ManyToOne(targetEntity: User::class)]
+    #[ORM\JoinColumn(name: "receiver_id", referencedColumnName: "id", nullable: false)]
+    private ?User $receiver;
 
     #[ORM\Column(type: "text")]
     private ?string $message;
@@ -23,20 +27,30 @@ class Inquiry
     #[ORM\ManyToOne(targetEntity: Car::class)]
     private ?Car $car;
 
-    // Getters and Setters
     public function getId(): ?int
     {
         return $this->id;
     }
 
-    public function getUser(): ?User
+    public function getSender(): ?User
     {
-        return $this->user;
+        return $this->sender;
     }
 
-    public function setUser(?User $user): self
+    public function setSender(?User $sender): self
     {
-        $this->user = $user;
+        $this->sender = $sender;
+        return $this;
+    }
+
+    public function getReceiver(): ?User
+    {
+        return $this->receiver;
+    }
+
+    public function setReceiver(?User $receiver): self
+    {
+        $this->receiver = $receiver;
         return $this;
     }
 

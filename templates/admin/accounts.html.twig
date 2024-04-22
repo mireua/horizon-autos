@@ -1,268 +1,169 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Accounts{% endblock %}
+{% block title %}User Management{% endblock %}
 
 {% block stylesheets %}
-<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet">
+<link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
 {% endblock %}
 
 {% block body %}
 <div class="container">
-<div class="row flex-lg-nowrap">
-
-  <div class="col-12 col-lg-auto mb-3" style="width: 200px;">
-
-    <div class="card p-3">
-
-      <div class="e-navlist e-navlist--active-bg">
-
-      <div class="e-navlist e-navlist--active-bold">
-         <div class="text-center px-xl-3">
-            <button class="btn btn-success btn-block" type="button"  onclick="window.location.href='{{ path('app_register') }}'">New User</button>
-               </div>
-             </div>
-        <hr class="my-3">
-          <ul class="nav">
-           <li class="nav-item"><a class="nav-link px-2 active" href="{{ path('admin_panel') }}"><i class="fa fa-fw fa-bar-chart mr-1"></i><span>Overview</span></a></li>
-             </ul>
-      </div>
-    </div>
-  </div>
-
-  <div class="col">
-    <div class="e-tabs mb-3 px-3">
-      <ul class="nav nav-tabs">
-        <li class="nav-item"><a class="nav-link active" href="#">Users</a></li>
-      </ul>
-    </div>
-
+    <h1 class="my-4 text-center">User Management</h1>
     <div class="row flex-lg-nowrap">
-      <div class="col mb-3">
-        <div class="e-panel card">
-          <div class="card-body">
-            <div class="e-table">
-              <div class="table-responsive table-lg mt-3">
-                <table class="table table-bordered">
-                  <thead>
-                    <tr>
-                      <th class="align-top">
-                        <div class="custom-control custom-control-inline custom-checkbox custom-control-nameless m-0">
-                          <input type="checkbox" class="custom-control-input" id="all-items">
-                          <label class="custom-control-label" for="all-items"></label>
-                        </div>
-                      </th>
-                      <th class="text-center">Photo</th>
-                      <th class="max-width text-center">Name</th>
-                      <th class="sortable text-center">Date</th>
-                      <th class="text-center">Actions</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    <tr>
-                      <td class="align-middle">
-                        <div class="custom-control custom-control-inline custom-checkbox custom-control-nameless m-0 align-top">
-                          <input type="checkbox" class="custom-control-input" id="item-1">
-                          <label class="custom-control-label" for="item-1"></label>
-                        </div>
-                      </td>
-                      <td class="align-middle text-center">
-                        <div class="bg-light d-inline-flex justify-content-center align-items-center align-top" style="width: 35px; height: 35px; border-radius: 3px;"><i class="fa fa-fw fa-photo" style="opacity: 0.8;"></i></div>
-                      </td>
-                      <td class="text-nowrap align-middle">Adam Cotter</td>
-                      <td class="text-nowrap align-middle"><span>09 Dec 2017</span></td>
-                      <td class="text-center align-middle">
-                        <div class="btn-group align-top">
-                            <button class="btn btn-success btn-block" type="button" onclick="loadUserForm()">Edit</button>
-                            <button class="btn btn-sm btn-outline-secondary" type="button"><i class="fa fa-trash"></i></button>
-                        </div>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td class="align-middle">
-                        <div class="custom-control custom-control-inline custom-checkbox custom-control-nameless m-0 align-top">
-                          <input type="checkbox" class="custom-control-input" id="item-2">
-                          <label class="custom-control-label" for="item-2"></label>
-                        </div>
-                      </td>
-                      <td class="align-middle text-center">
-                        <div class="bg-light d-inline-flex justify-content-center align-items-center align-top" style="width: 35px; height: 35px; border-radius: 3px;"><i class="fa fa-fw fa-photo" style="opacity: 0.8;"></i></div>
-                      </td>
-                      <td class="text-nowrap align-middle">Pauline Noble</td>
-                      <td class="text-nowrap align-middle"><span>26 Jan 2018</span></td>
-                      <td class="text-center align-middle">
-                        <div class="btn-group align-top">
-                            <button class="btn btn-success btn-block" type="button" onclick="loadUserForm()">Edit</button>
-                            <button class="btn btn-sm btn-outline-secondary" type="button"><i class="fa fa-trash"></i></button>
-                        </div>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td class="align-middle">
-                        <div class="custom-control custom-control-inline custom-checkbox custom-control-nameless m-0 align-top">
-                          <input type="checkbox" class="custom-control-input" id="item-3">
-                          <label class="custom-control-label" for="item-3"></label>
-                        </div>
-                      </td>
-                      <td class="align-middle text-center">
-                        <div class="bg-light d-inline-flex justify-content-center align-items-center align-top" style="width: 35px; height: 35px; border-radius: 3px;"><i class="fa fa-fw fa-photo" style="opacity: 0.8;"></i></div>
-                      </td>
-                      <td class="text-nowrap align-middle">Sherilyn Metzel</td>
-                      <td class="text-nowrap align-middle"><span>27 Jan 2018</span></td>
-                      <td class="text-center align-middle">
-                        <div class="btn-group align-top">
-                            <button class="btn btn-success btn-block" type="button" onclick="loadUserForm()">Edit</button>
-                            <button class="btn btn-sm btn-outline-secondary" type="button"><i class="fa fa-trash"></i></button>
-                        </div>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td class="align-middle">
-                        <div class="custom-control custom-control-inline custom-checkbox custom-control-nameless m-0 align-top">
-                          <input type="checkbox" class="custom-control-input" id="item-4">
-                          <label class="custom-control-label" for="item-4"></label>
-                        </div>
-                      </td>
-                  </tbody>
-                </table>
-              </div>
-              <div class="d-flex justify-content-center">
-                <ul class="pagination mt-3 mb-0">
-                  <li class="disabled page-item"><a href="#" class="page-link">‹</a></li>
-                  <li class="active page-item"><a href="#" class="page-link">1</a></li>
-                  <li class="page-item"><a href="#" class="page-link">2</a></li>
-                  <li class="page-item"><a href="#" class="page-link">›</a></li>
-                </ul>
-              </div>
+        <div class="col mb-3">
+            <div class="e-panel card">
+                <div class="card-body">
+                    <div class="table-responsive">
+                        <table class="table table-hover">
+                            <thead>
+                                <tr>
+                                    <th class="text-center">Name</th>
+                                    <th class="text-center">Email</th>
+                                    <th class="text-center">Role</th>
+                                    <th class="text-center">Phone Number</th>
+                                    <th class="text-center">Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for user in users %}
+                                <tr>
+                                    <td class="text-center">{{ user.name }}</td>
+                                    <td class="text-center">{{ user.email }}</td>
+                                    <td class="text-center">{{ user.roles|join(', ') }}</td>
+                                    <td class="text-center">{{ user.phone }}</td>
+                                    <td class="text-center">
+                                        <button class="btn btn-primary btn-sm" onclick="loadUserForm({{ user.id }})"
+                                            {{ app.user.id == user.id ? 'disabled' : '' }}>Edit</button>
+                                        <button class="btn btn-danger btn-sm" data-csrf="{{ csrf_token('delete_user' ~ user.id) }}" onclick="deleteUser({{ user.id }}, this.getAttribute('data-csrf'))"
+                                            {{ app.user.id == user.id ? 'disabled' : '' }}>Delete</button>
+                                        {% if 'ROLE_MANAGER' in app.user.roles and app.user.id != user.id %}
+                                        <button class="btn btn-success btn-sm" onclick="promoteUser({{ user.id }})">Promote</button>
+                                        <button class="btn btn-warning btn-sm" onclick="demoteUser({{ user.id }})">Demote</button>
+                                        {% endif %}
+                                    </td>
+                                </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
             </div>
-          </div>
         </div>
-      </div>
-
-        </div>
-      </div>
     </div>
 
-    <!-- User Form Modal -->
-    <div class="modal fade" role="dialog" tabindex="-1" id="user-form-modal">
-      <div class="modal-dialog modal-lg" role="document">
+    <!-- Modal for User Form -->
+<div class="modal fade" id="user-form-modal" tabindex="-1" role="dialog" aria-labelledby="modelTitleId" aria-hidden="true">
+    <div class="modal-dialog" role="document">
         <div class="modal-content">
-          <div class="modal-header">
-            <h5 class="modal-title">Create User</h5>
-            <button type="button" class="close" data-dismiss="modal">
-              <span aria-hidden="true">×</span>
-            </button>
-          </div>
-          <div class="modal-body">
-            <div class="py-1">
-              <form class="form" novalidate="">
-                <div class="row">
-                  <div class="col">
-                    <div class="row">
-                      <div class="col">
-                        <div class="form-group">
-                          <label>Full Name</label>
-                          <input class="form-control" type="text" name="name" placeholder="John Smith" value="John Smith">
-                        </div>
-                      </div>
-                      <div class="col">
-                        <div class="form-group">
-                          <label>Username</label>
-                          <input class="form-control" type="text" name="username" placeholder="johnny.s" value="johnny.s">
-                        </div>
-                      </div>
-                    </div>
-                    <div class="row">
-                      <div class="col">
-                        <div class="form-group">
-                          <label>Email</label>
-                          <input class="form-control" type="text" placeholder="user@example.com">
-                        </div>
-                      </div>
-                    </div>
-                    <div class="row">
-                      <div class="col mb-3">
-                        <div class="form-group">
-                          <label>About</label>
-                          <textarea class="form-control" rows="5" placeholder="My Bio"></textarea>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <div class="row">
-                  <div class="col-12 col-sm-6 mb-3">
-                    <div class="mb-2"><b>Change Password</b></div>
-                    <div class="row">
-                      <div class="col">
-                        <div class="form-group">
-                          <label>Current Password</label>
-                          <input class="form-control" type="password" placeholder="••••••">
-                        </div>
-                      </div>
-                    </div>
-                    <div class="row">
-                      <div class="col">
-                        <div class="form-group">
-                          <label>New Password</label>
-                          <input class="form-control" type="password" placeholder="••••••">
-                        </div>
-                      </div>
-                      <div class="col">
-                        <div class="form-group">
-                          <label>Confirm <span class="d-none d-xl-inline">Password</span></label>
-                          <input class="form-control" type="password" placeholder="••••••"></div>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="col-12 col-sm-5 offset-sm-1 mb-3">
-                    <div class="mb-2"><b>Keeping in Touch</b></div>
-                    <div class="row">
-                      <div class="col">
-                        <label>Email Notifications</label>
-                        <div class="custom-controls-stacked px-2">
-                          <div class="custom-control custom-checkbox">
-                            <input type="checkbox" class="custom-control-input" id="notifications-blog" checked="">
-                            <label class="custom-control-label" for="notifications-blog">Blog posts</label>
-                          </div>
-                          <div class="custom-control custom-checkbox">
-                            <input type="checkbox" class="custom-control-input" id="notifications-news" checked="">
-                            <label class="custom-control-label" for="notifications-news">Newsletter</label>
-                          </div>
-                          <div class="custom-control custom-checkbox">
-                            <input type="checkbox" class="custom-control-input" id="notifications-offers" checked="">
-                            <label class="custom-control-label" for="notifications-offers">Personal Offers</label>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <div class="row">
-                  <div class="col d-flex justify-content-end">
-                    <button class="btn btn-primary" type="submit">Save Changes</button>
-                  </div>
-                </div>
-              </form>
-
+            <div class="modal-header">
+                <h5 class="modal-title">Edit User Details</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">×</span>
+                </button>
             </div>
-          </div>
+            <div class="modal-body">
+                <form id="edit-user-form">
+                    <input type="hidden" id="edit-user-id" name="id">
+                    <div class="form-group">
+                        <label for="edit-email">Email</label>
+                        <input type="email" class="form-control" id="edit-email" name="email">
+                    </div>
+                    <div class="form-group">
+                        <label for="edit-name">Name</label>
+                        <input type="text" class="form-control" id="edit-name" name="name">
+                    </div>
+                    <div class="form-group">
+                        <label for="edit-phone">Phone Number</label>
+                        <input type="text" class="form-control" id="edit-phone" name="phone">
+                    </div>
+                    <button type="submit" class="btn btn-primary">Save Changes</button>
+                </form>
+            </div>
         </div>
-      </div>
     </div>
-  </div>
 </div>
-</div>
-
 {% endblock %}
 
 {% block javascripts %}
 <script>
-function loadUserForm() {
+    // Define a global JavaScript object for application data
+    var app = {
+        user: {
+            id: {{ app.user.id }}
+        }
+    };
+</script>
+<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+<script>
+  function loadUserForm(userId) {
+    const url = '{{ path('admin_fetch_user', {'id': 'USER_ID'}) }}'.replace('USER_ID', userId);
+    fetch(url)
+        .then(response => response.json())
+        .then(data => {
+            document.getElementById('edit-email').value = data.email;
+            document.getElementById('edit-name').value = data.name;
+            document.getElementById('edit-phone').value = data.phone;
+            document.getElementById('edit-user-id').value = data.id; // Hidden input to store user ID for the update
+            $('#user-form-modal').modal('show');
+        })
+        .catch(error => console.error('Error loading user data:', error));
+  }
 
-    $('#user-form-modal').modal('show');
+  document.addEventListener('DOMContentLoaded', function() {
+    document.getElementById('edit-user-form').addEventListener('submit', function(event) {
+        event.preventDefault();
+        const userId = document.getElementById('edit-user-id').value;
+        const formData = new FormData(this);
+        const url = '{{ path('admin_edit_account', {'id': 'USER_ID'}) }}'.replace('USER_ID', userId);
 
+        fetch(url, {
+            method: 'POST',
+            body: formData
+        })
+        .then(response => {
+            if (!response.ok) throw new Error('Failed to update user');
+            $('#user-form-modal').modal('hide');
+            location.reload(); // Optionally reload to see changes, or update the UI dynamically
+        })
+        .catch(error => console.error('Error updating user:', error));
+    });
+  });
 
-    $('#user-form-modal .modal-body').load('{{ path('admin_create') }}');
+  function deleteUser(userId, csrfToken) {
+    if (app.user.id !== userId && confirm('Are you sure you want to delete this user?')) {
+        const url = '{{ path('admin_delete_account', {'id': 'USER_ID'}) }}'.replace('USER_ID', userId);
+        const formData = new FormData();
+        formData.append('_token', csrfToken);
+
+        fetch(url, {
+            method: 'POST',
+            body: formData
+        })
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Network response was not ok');
+            }
+            location.reload();
+        })
+        .catch(error => console.error('Error:', error));
+    }
 }
+
+
+  function promoteUser(userId) {
+      const url = '{{ path('admin_promote_account', {'id': 'USER_ID'}) }}'.replace('USER_ID', userId);
+      fetch(url, { method: 'POST' })
+          .then(() => location.reload())
+          .catch(error => console.error('Error:', error));
+  }
+
+  function demoteUser(userId) {
+      const url = '{{ path('admin_demote_account', {'id': 'USER_ID'}) }}'.replace('USER_ID', userId);
+      fetch(url, { method: 'POST' })
+          .then(() => location.reload())
+          .catch(error => console.error('Error:', error));
+  }
 </script>
 {% endblock %}

@@ -2,11 +2,6 @@
 
 {% block title %}Admin Dashboard{% endblock %}
 
-{% block stylesheets %}
-    {{ parent() }}
-    <link rel="stylesheet" href="{{ asset('styles/adminpanel.css') }}">  {# Ensure you link to your CSS correctly #}
-{% endblock %}
-
 {% block body %}
 <div class="container mt-5">
     <h1 class="mb-4">Admin Dashboard</h1>
@@ -43,7 +38,7 @@
                 <div class="card-body">
                     <h5 class="card-title">View Financing Requests</h5>
                     <p class="card-text">Review and process financing applications.</p>
-                    <a href="{{ path('admin_crud') }}" class="btn btn-primary {% if not is_granted('ROLE_MANAGER') and not is_granted('ROLE_SALESPERSON') %}disabled{% endif %}">View Financing</a>
+                    <a href="{{ path('admin_financing', {}) }}" class="btn btn-primary {% if not is_granted('ROLE_MANAGER') and not is_granted('ROLE_SALESPERSON') %}disabled{% endif %}">View Financing</a>
                 </div>
             </div>
         </div>

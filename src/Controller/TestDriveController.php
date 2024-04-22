@@ -97,32 +97,48 @@ class TestDriveController extends AbstractController
     }
 
     #[Route('/submit-inquiry/{carId}', name: 'submit_inquiry', methods: ['POST'])]
-     public function submitInquiry(int $carId, Request $request): Response
+    public function submitInquiry(Request $request, int $carId): Response
     {
-        // Ensure the user is authenticated
-        if (!$this->getUser()) {
-            return $this->json(['message' => 'Authentication required'], Response::HTTP_UNAUTHORIZED);
+        // Get the user from the request (adjust this as necessary based on how you manage user sessions)
+        $userId = $this->getUser()->getId();  // Assuming you are using Symfony's default security
+        $user = $this->entityManager->getRepository(User::class)->find($userId);
+        if (!$user) {
+            return $this->json(['message' => 'User not found'], Response::HTTP_NOT_FOUND);
         }
 
-        // Find the car related to the inquiry
+        // Find the car associated with the inquiry
         $car = $this->entityManager->getRepository(Car::class)->find($carId);
         if (!$car) {
             return $this->json(['message' => 'Car not found'], Response::HTTP_NOT_FOUND);
         }
 
-        $user = $this->getUser(); // Assuming the User entity implements UserInterface
-        $message = $request->request->get('message', '');
+        // Find an appropriate receiver based on roles
+        $eligibleRoles = ['ROLE_MANAGER', 'ROLE_SALESPERSON', 'ROLE_TECHNICIAN'];
+        $queryBuilder = $this->entityManager->createQueryBuilder();
+        $queryBuilder->select('u')
+            ->from(User::class, 'u')
+            ->where('u.roles LIKE :managerRole')
+            ->orWhere('u.roles LIKE :salesRole')
+            ->orWhere('u.roles LIKE :techRole')
+            ->setParameter('managerRole', '%"ROLE_MANAGER"%')
+            ->setParameter('salesRole', '%"ROLE_SALESPERSON"%')
+            ->setParameter('techRole', '%"ROLE_TECHNICIAN"%')
+            ->setMaxResults(1);
 
-        // Create the inquiry object using a factory or directly
-        $inquiry = InquiryFactory::create($user, $message, $car);
-        
-        // Persist the new inquiry
+        $receiver = $queryBuilder->getQuery()->getOneOrNullResult();
+        if (!$receiver) {
+            return $this->json(['message' => 'No eligible receiver found'], Response::HTTP_BAD_REQUEST);
+        }
+
+        // Create the inquiry
+        $message = $request->request->get('message');
+        $inquiry = InquiryFactory::create($user, $receiver, $message, $car);
+
+        // Persist the inquiry
         $this->entityManager->persist($inquiry);
         $this->entityManager->flush();
 
-        // Return a response indicating success
-        return $this->json([
-            'message' => 'Inquiry submitted successfully.'
-        ], Response::HTTP_CREATED);
+        // Return success response
+        return $this->json(['message' => 'Inquiry submitted successfully']);
     }
 }
