@@ -54,9 +54,9 @@
             </button>
             <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="dropdownMenuButton">
                 {% if app.user %}
-                    <li><a class="dropdown-item" href="#">View Favourites</a></li>
-                    <li><a class="dropdown-item" href="#">View Messages</a></li>
-                    <li><a class="dropdown-item" href="#">View Orders</a></li>
+                    <li><a class="dropdown-item" href="{{ path('user_favourites') }}">View Favourites</a></li>
+                    <li><a class="dropdown-item" href="{{ path('user_inbox') }}">View Messages</a></li>
+                    <li><a class="dropdown-item" href="{{ path('user_orders') }}">View Orders</a></li>
                     <li><a class="dropdown-item" href="{{ path('app_logout') }}">Log Out</a></li>
                 {% else %}
                     <li><a class="dropdown-item" href="{{ path('app_login') }}">Log In</a></li>

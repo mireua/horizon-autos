@@ -1,0 +1,17 @@
+@keyframes moveRight {
+    0% { transform: translateX(-100%); }
+    100% { transform: translateX(100%); }
+}
+
+@keyframes moveLeft {
+    0% { transform: translateX(100%); }
+    100% { transform: translateX(-100%); }
+}
+
+.moving-text {
+    animation: moveRight 7s linear infinite;
+}
+
+.moving-text.reversed {
+    animation: moveLeft 7s linear infinite;
+}
