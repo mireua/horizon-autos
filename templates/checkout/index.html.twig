@@ -1,0 +1,44 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Checkout - {{ car.make }} {{ car.model }}{% endblock %}
+
+{% block body %}
+<div class="container mt-5">
+    <h2>Checkout</h2>
+    <div class="row">
+        <div class="col-md-8">
+            <!-- Vehicle information panel -->
+            <div class="card mb-3">
+                <div class="card-body">
+                    <h5 class="card-title">{{ car.make }} {{ car.model }}</h5>
+                    <img src="{{ asset('images/cars/' ~ car.image) }}" class="card-img-top" alt="Car Image">
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <!-- Order summary panel -->
+            <div class="card mb-3">
+                <div class="card-body">
+                    <h5 class="card-title">Order Summary</h5>
+                    <p><strong>Item:</strong> {{ car.make }} {{ car.model }}</p>
+                    <p><strong>Price:</strong> €{{ car.price|number_format(2, '.', ',') }}</p>
+                    <hr>
+                    <h5>Total: €{{ car.price|number_format(2, '.', ',') }}</h5>
+                </div>
+            </div>
+            <!-- Payment method panel -->
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">Payment Method</h5>
+                    <p>Please choose your payment method:</p>
+                    <div class="btn-group" role="group" aria-label="Payment Method">
+                        <a href="{{ path('checkout_cash', {'id': car.id}) }}" class="btn btn-primary">Pay with Cash</a>
+                        <a href="{{ path('checkout_finance', {'id': car.id}) }}" class="btn btn-primary">Pay by Finance</a>
+                    </div>
+                    <p class="mt-3">Note: Finance payment will be submitted for approval.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

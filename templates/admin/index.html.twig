@@ -43,7 +43,7 @@
                 <div class="card-body">
                     <h5 class="card-title">View Financing Requests</h5>
                     <p class="card-text">Review and process financing applications.</p>
-                    <a href="{{ path('admin_financing') }}" class="btn btn-primary {% if not is_granted('ROLE_MANAGER') and not is_granted('ROLE_SALESPERSON') %}disabled{% endif %}">View Financing</a>
+                    <a href="{{ path('admin_crud') }}" class="btn btn-primary {% if not is_granted('ROLE_MANAGER') and not is_granted('ROLE_SALESPERSON') %}disabled{% endif %}">View Financing</a>
                 </div>
             </div>
         </div>

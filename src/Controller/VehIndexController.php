@@ -9,7 +9,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Doctrine\ORM\EntityManagerInterface;
 
-#[Route('/vehicles')]
+#[Route('/vehicleindex')]
 class VehIndexController extends AbstractController
 {
     private $entityManager;

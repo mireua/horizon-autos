@@ -35,6 +35,20 @@ class AdminPanelController extends AbstractController
         return $this->render('admin/accounts.html.twig');
     }
 
+    #[Route('/admin/crud', name: 'admin_crud')]
+    public function crudAccounts(): Response
+    {
+        // Implement logic for CRUD on accounts
+        return $this->render('admin/crud.html.twig');
+    }
+
+    #[Route('/admin/create', name: 'admin_create')]
+    public function createAccounts(): Response
+    {
+        // Implement logic for CRUD on accounts
+        return $this->render('admin/create.html.twig');
+    }
+
     #[Route('/admin/car-listings', name: 'admin_car_listings')]
     public function manageCarListings(): Response
     {
