@@ -1,0 +1,52 @@
+bootstrap used:
+https://www.bootdey.com/snippets/view/bs4-crud-users#html
+
+https://bootdey.com/snippets/view/order-details
+
+https://startbootstrap.com/template/small-business
+
+https://getbootstrap.com
+
+
+jquery used:
+https://api.jquery.com
+
+popper.js used:
+https://popper.js.org/docs/v2/
+
+Car images
+bmw 3series:
+https://www.google.com/url?sa=i&url=https%3A%2F%2Fcars.usnews.com%2Fcars-trucks%2Fbmw%2F3-series%2F2018&psig=AOvVaw2u-zbR5gn2ExBeBmmWMvYg&ust=1713889172674000&source=images&cd=vfe&opi=89978449&ved=0CBIQjRxqFwoTCJCglu2c1oUDFQAAAAAdAAAAABAE
+
+bmw 5series
+https://www.google.com/url?sa=i&url=https%3A%2F%2Fwww.motortrend.com%2Fcars%2Fbmw%2F5-series%2F2020%2F&psig=AOvVaw3aaWJZbyZrOHqxmdKDE_sN&ust=1713889248900000&source=images&cd=vfe&opi=89978449&ved=0CBIQjRxqFwoTCKi385Cd1oUDFQAAAAAdAAAAABAE
+
+audi a4
+https://www.motortrend.com/uploads/sites/10/2019/03/2019-audi-a4-premium-sedan-angular-front.png
+
+audi a6
+https://www.google.com/url?sa=i&url=https%3A%2F%2Fwww.motortrend.com%2Fcars%2Faudi%2Fa6%2F2019%2F&psig=AOvVaw08OnaONPyGan2tKixMAyHq&ust=1713889376087000&source=images&cd=vfe&opi=89978449&ved=0CBIQjRxqFwoTCIiVtM-d1oUDFQAAAAAdAAAAABAE
+
+vw golf
+https://www.google.com/url?sa=i&url=https%3A%2F%2Fwww.thecarconnection.com%2Foverview%2Fvolkswagen_golf_2014&psig=AOvVaw15c_HVnt_AbmjRu2BLnlsr&ust=1713889412101000&source=images&cd=vfe&opi=89978449&ved=0CBIQjRxqFwoTCNiyo-Gd1oUDFQAAAAAdAAAAABAE
+
+vw passat
+https://www.iihs.org/cdn-cgi/image/width=636/api/ratings/model-year-images/2494/
+
+nissan altima
+https://platform.cstatic-images.com/xlarge/in/v2/stock_photos/5a084ee0-3dd7-4f6e-8fb9-c24bd3a523db/a801e43e-aec5-40dd-8d08-088c12e38906.png
+
+nissan maxima
+https://www.google.com/url?sa=i&url=https%3A%2F%2Fwww.thetruthaboutcars.com%2F2015%2F04%2Fnew-york-2015-nissan-maxima-revealed%2F&psig=AOvVaw0lu9E5gB-n7lRnLub_21YY&ust=1713889550056000&source=images&cd=vfe&opi=89978449&ved=0CBIQjRxqFwoTCIjXnKOe1oUDFQAAAAAdAAAAABAE
+
+toyota camry
+https://www.google.com/imgres?q=Toyota%20Camry%20(2019)&imgurl=https%3A%2F%2Fwww.motortrend.com%2Fuploads%2Fsites%2F10%2F2018%2F09%2F2019-toyota-camry-se-auto-sedan-angular-front.png&imgrefurl=https%3A%2F%2Fwww.motortrend.com%2Fcars%2Ftoyota%2Fcamry%2F2019%2F&docid=OF2c3HL_0nMFDM&tbnid=Cgbcu46nAEtZUM&vet=12ahUKEwj96sqsntaFAxVuX0EAHQdBDD4QM3oECBMQAA..i&w=1920&h=1275&hcb=2&ved=2ahUKEwj96sqsntaFAxVuX0EAHQdBDD4QM3oECBMQAA
+
+toyota corolla 
+https://www.google.com/imgres?q=Toyota%20Corolla%20(2017)&imgurl=https%3A%2F%2Fwww.cars.com%2Fi%2Flarge%2Fin%2Fv2%2Fstock_photos%2Fa64393c6-0136-4a72-b330-744a9736efd1%2Fee0f249b-1136-4f5e-b068-42e7a17c5c4d.png&imgrefurl=https%3A%2F%2Fwww.cars.com%2Fresearch%2Ftoyota-corolla-2017%2F&docid=PtypQSb8fwXPZM&tbnid=HZo3rJBqxIJ_3M&vet=12ahUKEwiiwM_EntaFAxVsQEEAHVUPAOMQM3oECBMQAA..i&w=504&h=333&hcb=2&ved=2ahUKEwiiwM_EntaFAxVsQEEAHVUPAOMQM3oECBMQAA
+
+honda accord
+https://www.google.com/url?sa=i&url=https%3A%2F%2Fwww.cars.com%2Fresearch%2Fhonda-accord-2017%2F&psig=AOvVaw0Tds51esdaQA773osf3KQH&ust=1713889659398000&source=images&cd=vfe&opi=89978449&ved=0CBIQjRxqFwoTCOiQk9Se1oUDFQAAAAAdAAAAABAE
+
+honda civic
+https://www.motortrend.com/uploads/sites/10/2017/11/2018-honda-civic-lx-sedan-angular-front.png
