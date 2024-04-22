@@ -34,4 +34,18 @@ class VehIndexController extends AbstractController
             'vehicles' => $vehicles,
         ]);
     }
+
+    #[Route('/search', name: 'veh_index_search', methods: ['GET'])]
+    public function search(Request $request): Response
+    {
+        $searchTerm = $request->query->get('search');
+
+        return $this->redirectToRoute('veh_index', ['search' => $searchTerm]);
+    }
+
+    #[Route('/reset', name: '_reset')]
+    public function resetSearch(): Response
+    {
+        return $this->redirectToRoute('veh_index');
+    }
 }

@@ -7,6 +7,7 @@ use App\Entity\User;
 use App\Entity\Inquiry;
 use App\Entity\Financing;
 use App\Entity\Car;
+use App\Entity\CarService;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -125,7 +126,7 @@ class AdminPanelController extends AbstractController
     }
 
     #[Route('/admin/test-drives/approve/{id}', name: 'approve_test_drive', methods: ['GET'])]
-    public function showApproveModal(TestDriveAppointment $testDrive): Response
+    public function showApproveServiceModal(TestDriveAppointment $testDrive): Response
     {
         return $this->render('admin/approve_test_drive_modal.html.twig', [
             'testDrive' => $testDrive,
@@ -158,8 +159,45 @@ class AdminPanelController extends AbstractController
     #[Route('/admin/service-requests', name: 'admin_service_requests')]
     public function viewServiceRequests(): Response
     {
-        return $this->render('admin/service_requests.html.twig');
+        $serviceRequests = $this->entityManager->getRepository(CarService::class)->findAll();
+        
+        return $this->render('admin/service_requests.html.twig', [
+            'serviceRequests' => $serviceRequests,
+        ]);
     }
+
+    #[Route('/admin/service-requests/approve/{id}', name: 'approve_service_request', methods: ['GET'])]
+    public function showApproveModal(CarService $serviceRequest): Response
+    {
+        return $this->render('admin/approve_service_request_modal.html.twig', [
+            'serviceRequest' => $serviceRequest,
+        ]);
+    }
+
+    #[Route('/admin/service-requests/allocate/{id}', name: 'allocate_time_slot', methods: ['POST'])]
+    public function allocateServiceTimeSlot(Request $request, CarService $serviceRequest): Response
+    {
+        $timeSlot = $request->request->get('timeSlot');
+        
+        $serviceRequest->setServiceDate(new \DateTime($timeSlot));
+        $serviceRequest->setStatus('approved');
+        $this->entityManager->flush();
+
+        $this->addFlash('success', 'Time slot allocated successfully!');
+        return $this->redirectToRoute('admin_service_requests');
+    }
+
+    #[Route('/admin/service-requests/deny/{id}', name: 'deny_service_request', methods: ['POST'])]
+    public function denyServiceRequest(CarService $serviceRequest): Response
+    {
+        $this->entityManager->remove($serviceRequest);
+        $this->entityManager->flush();
+        
+        $this->addFlash('success', 'Service request denied and deleted successfully!');
+        return $this->redirectToRoute('admin_service_requests');
+    }
+
+    
 
     #[Route('/admin/accounts', name: 'admin_accounts', methods: ['GET'])]
     public function manageAccounts(): Response

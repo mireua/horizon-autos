@@ -14,8 +14,8 @@
         <h1 class="display-3 fw-bold">Welcome to Horizon Autos!</h1>
         <p class="lead">Explore top-quality vehicles and unmatched service.</p>
         <!-- Search Bar -->
-        <form class="d-flex justify-content-center mt-4" role="search">
-            <input class="form-control me-2" type="search" placeholder="Search for a car" aria-label="Search" style="width: 50%;">
+        <form class="d-flex justify-content-center mt-4" action="{{ path('veh_index') }}" method="get">
+            <input class="form-control me-2" type="search" name="search" placeholder="Search for a car" aria-label="Search" style="width: 50%;">
             <button class="btn btn-outline-primary" type="submit">Search</button>
         </form>
     </div>
@@ -41,7 +41,7 @@
             <div class="feature-card p-4">
                 <h2>Car Service</h2>
                 <p>Bought with us and you need an oil change before your NCT?</p>
-                <a class="btn btn-primary" href="#" role="button">Contact Us »</a>
+                <a class="btn btn-primary" href="{{ path('car_service') }}" role="button">Contact Us »</a>
             </div>
         </div>
     </div>

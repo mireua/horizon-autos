@@ -24,6 +24,9 @@ class CarService
     #[ORM\JoinColumn(nullable: false)]
     private ?Car $car = null;
 
+    #[ORM\Column(type: "string", length: 20)]
+    private ?string $status = 'pending'; // Default status is pending
+
     public function getId(): ?int
     {
         return $this->id;
@@ -59,6 +62,17 @@ class CarService
     public function setCar(?Car $car): self
     {
         $this->car = $car;
+        return $this;
+    }
+
+    public function getStatus(): ?string
+    {
+        return $this->status;
+    }
+
+    public function setStatus(string $status): self
+    {
+        $this->status = $status;
         return $this;
     }
 }

@@ -6,6 +6,10 @@ use Symfony\Component\HttpFoundation\Request;
 use App\Entity\User;
 use App\Entity\Inquiry;
 use App\Entity\Car;
+use App\Entity\CarService;
+use App\Entity\Sale;
+use App\Entity\Financing;
+use App\Entity\TestDriveAppointment;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\Response;
@@ -69,11 +73,13 @@ class UserController extends AbstractController
     }
 
     #[Route(path: '/orders', name: 'user_orders')]
-    public function orders(): Response
+    public function index(EntityManagerInterface $entityManager): Response
     {
-        $userRepository = $this->entityManager->getRepository(User::class)->findAll();
-        return $this->render('user/orders.html.twig',[
-            
+        // Fetch sales
+        $sales = $entityManager->getRepository(Sale::class)->findAll();
+    
+        return $this->render('user/orders.html.twig', [
+            'sales' => $sales,
         ]);
     }
 
