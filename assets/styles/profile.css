@@ -1,0 +1,88 @@
+.hero {
+    position: relative;
+    background: url('../images/garage.jpg') no-repeat center center;
+    background-size: cover;
+    height: 74.51vh;
+    color: black;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    margin-left: 0;
+    margin-right: 0;
+}
+
+.hero-text {
+    background-color: rgba(255, 255, 255, 0.8);
+    padding: 20px;
+    border-radius: 10px;
+    max-width: 80%;
+}
+
+.container {
+    padding-right: 15px;
+    padding-left: 15px;
+    margin-right: auto;
+    margin-left: auto;
+}
+
+.footer {
+    background-color: #343a40;
+    color: white;
+    text-align: center;
+    width: 100%;
+    padding: 16px;
+}
+
+.feature-card {
+    background-color: white;
+    border-radius: 0.75rem;
+    padding: 20px;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+}
+
+html, body {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    overflow-x: hidden;
+    overflow-x: hidden;
+}
+
+.container-fluid.main {
+    padding-left: 0;
+    padding-right: 0;
+}
+
+.container-fluid.footer {
+    padding-left: 0;
+    padding-right: 0;
+}
+
+.feature {
+    position: relative;
+    z-index: 1; /* Ensure the cards are above the hero */
+}
+
+.feature .row {
+    margin-top: -100px; /* Adjust as needed to overlap the hero */
+}
+
+@keyframes moveRight {
+    0% { transform: translateX(-100%); }
+    100% { transform: translateX(100%); }
+}
+
+@keyframes moveLeft {
+    0% { transform: translateX(100%); }
+    100% { transform: translateX(-100%); }
+}
+
+.moving-text {
+    animation: moveRight 8s linear infinite;
+}
+
+.moving-text.reversed {
+    animation: moveLeft 8s linear infinite;
+}
