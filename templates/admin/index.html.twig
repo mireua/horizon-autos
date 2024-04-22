@@ -20,7 +20,7 @@
                 <div class="card-body">
                     <h5 class="card-title">Manage Car Listings</h5>
                     <p class="card-text">Add, edit, or remove car listings from the inventory.</p>
-                    <a href="{{ path('admin_car_listings') }}" class="btn btn-primary {% if not is_granted('ROLE_MANAGER') %}disabled{% endif %}">Manage Listings</a>
+                    <a href="{{ path('admin_car_list', {}) }}" class="btn btn-primary {% if not is_granted('ROLE_MANAGER') %}disabled{% endif %}">Manage Listings</a>
                 </div>
             </div>
         </div>

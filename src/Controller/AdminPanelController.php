@@ -6,6 +6,7 @@ use App\Entity\TestDriveAppointment;
 use App\Entity\User;
 use App\Entity\Inquiry;
 use App\Entity\Financing;
+use App\Entity\Car;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -29,6 +30,90 @@ class AdminPanelController extends AbstractController
     {
         return $this->render('admin/index.html.twig');
     }
+
+    #[Route('/admin/car-list', name: 'admin_car_list')]
+    public function adminCarList(EntityManagerInterface $entityManager): Response
+    {
+        $vehicles = $entityManager->getRepository(Car::class)->findAll();
+    
+        return $this->render('admin/car_listings.html.twig', [
+            'vehicles' => $vehicles,
+        ]);
+    }
+    
+    #[Route('/admin/car-list/new', name: 'admin_car_create', methods: ['GET', 'POST'])]
+    public function adminCarCreate(Request $request, EntityManagerInterface $entityManager): Response
+    {
+        // Handle form submission for creating a new car
+        if ($request->isMethod('POST')) {
+            $data = $request->request->all();
+    
+            // Create a new car entity
+            $car = new Car();
+            $car->setMake($data['make']);
+            $car->setModel($data['model']);
+            $car->setYear($data['year']);
+            $car->setEngine($data['engine']);
+            $car->setPrice((float)$data['price']);
+            $car->setVin($data['vin']);
+            $car->setDescription($data['description']);
+            $car->setStatus('Available');
+            $car->setImage($data['image']);
+            // Set other fields accordingly
+    
+            // Persist the new car entity
+            $entityManager->persist($car);
+            $entityManager->flush();
+    
+            $this->addFlash('success', 'Car created successfully.');
+            return $this->redirectToRoute('admin_car_list');
+        }
+    
+        return $this->render('admin/admin_car_create.html.twig');
+    }
+    
+    #[Route('/admin/car-list/{id}/edit', name: 'admin_car_edit', methods: ['GET', 'POST'])]
+    public function adminCarEdit(Car $car, Request $request, EntityManagerInterface $entityManager): Response
+    {
+        // Handle form submission for editing an existing car
+        if ($request->isMethod('POST')) {
+            $data = $request->request->all();
+    
+            // Update car entity with new data
+            $car->setMake($data['make']);
+            $car->setModel($data['model']);
+            $car->setYear($data['year']);
+            $car->setEngine($data['engine']);
+            $car->setPrice($data['price']);
+            $car->setVin($data['vin']);
+            $car->setDescription($data['description']);
+            $car->setImage($data['image']);
+            // Update other fields accordingly
+    
+            // Persist the updated car entity
+            $entityManager->flush();
+    
+            $this->addFlash('success', 'Car updated successfully.');
+            return $this->redirectToRoute('admin_car_list');
+        }
+    
+        return $this->render('admin/admin_car_edit.html.twig', [
+            'car' => $car,
+        ]);
+    }
+    
+    #[Route('/admin/car-list/{id}', name: 'admin_car_delete', methods: ['DELETE'])]
+    public function adminCarDelete(Car $car, EntityManagerInterface $entityManager): Response
+    {
+        // Delete the car entity
+        $entityManager->remove($car);
+        $entityManager->flush();
+    
+        $this->addFlash('success', 'Car deleted successfully.');
+        return $this->redirectToRoute('admin_car_list');
+    }
+
+    
     #[Route('/admin/test-drives', name: 'admin_test_drives')]
     public function viewTestDrives(): Response
     {
@@ -155,12 +240,6 @@ class AdminPanelController extends AbstractController
         $this->entityManager->flush();
         $this->addFlash('success', 'User demoted to Customer.');
         return $this->redirectToRoute('admin_accounts');
-    }
-
-    #[Route('/admin/car-listings', name: 'admin_car_listings')]
-    public function manageCarListings(): Response
-    {
-        return $this->render('admin/car_listings.html.twig');
     }
 
     #[Route('/admin/financing', name: 'admin_financing', methods: ['GET'])]

@@ -19,5 +19,13 @@ class CarRepository extends ServiceEntityRepository
         parent::__construct($registry, Car::class);
     }
 
-    // Add custom methods here if needed
+    public function findByMakeOrModel(string $search): array
+    {
+        return $this->createQueryBuilder('c')
+            ->where('c.make LIKE :search')
+            ->orWhere('c.model LIKE :search')
+            ->setParameter('search', '%' . $search . '%')
+            ->getQuery()
+            ->getResult();
+    }
 }

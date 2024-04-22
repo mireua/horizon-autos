@@ -27,7 +27,7 @@
                     <h5 class="card-title">{{ vehicle.make }} {{ vehicle.model }}</h5>
                     <p class="card-text">{{ vehicle.description }}</p>
                     <p class="card-text"><strong>Price:</strong> €{{ vehicle.price|number_format(2, '.', ',') }}</p>
-                    <button class="btn btn-primary btn-block">Book Now</button>
+                    <a href="{{ path('veh_details', {'id': vehicle.id}) }}" class="btn btn-primary btn-block">Book Now</a>
                 </div>
             </div>
         </div>

@@ -15,7 +15,7 @@
                 <p><strong>Price:</strong> €{{ car.price|number_format(2, '.', ',') }}</p>
                 {% if app.user %}
                 <div class="btn-group" role="group" aria-label="Button Group">
-                    <form action="{{ path('homepage', {'id': car.id}) }}" method="post">
+                    <form action="{{ path('add_to_favorites', {'id': car.id}) }}" method="post">
                         <button type="submit" class="btn btn-primary">Add to Favorites</button>
                     </form>
                     <form action="{{ path('checkout', {'id': car.id}) }}" method="post">

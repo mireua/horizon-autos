@@ -71,12 +71,10 @@ class UserController extends AbstractController
     #[Route(path: '/orders', name: 'user_orders')]
     public function orders(): Response
     {
-        return $this->render('user/orders.html.twig');
+        $userRepository = $this->entityManager->getRepository(User::class)->findAll();
+        return $this->render('user/orders.html.twig',[
+            
+        ]);
     }
 
-    #[Route(path: '/favourites', name: 'user_favourites')]
-    public function favourites(): Response
-    {
-        return $this->render('user/favourites.html.twig');
-    }
 }

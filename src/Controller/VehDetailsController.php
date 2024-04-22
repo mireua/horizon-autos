@@ -23,20 +23,15 @@ class VehDetailsController extends AbstractController
     #[Route('/{id}', name: 'veh_details', methods: ['GET'])]
     public function details(int $id, Request $request): Response
     {
-        // Retrieve the car details from the database
         $car = $this->entityManager->getRepository(Car::class)->find($id);
 
-        // Initialize user to null
         $user = null;
 
-        // Check if user is logged in
         if ($this->getUser()) {
-            // Retrieve the current user details from the database
             $userRepository = $this->entityManager->getRepository(User::class);
             $user = $userRepository->findOneBy(['email' => $this->getUser()->getEmail()]);
         }
 
-        // Render the details template with the car details and user details
         return $this->render('vehindex/view.html.twig', [
             'car' => $car,
             'user' => $user,

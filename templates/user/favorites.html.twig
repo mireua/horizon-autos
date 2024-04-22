@@ -1,0 +1,38 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}My Favorites{% endblock %}
+
+{% block body %}
+<div class="container mt-5">
+    <h2 class="mb-4">My Favorites</h2>
+    <div class="table-responsive">
+        <table class="table table-bordered">
+            <thead>
+                <tr>
+                    <th>#</th>
+                    <th>Make</th>
+                    <th>Model</th>
+                    <th>Year</th>
+                    <th>Price</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for favorite in favorites %}
+                <tr>
+                    <td>{{ loop.index }}</td>
+                    <td>{{ favorite.car.make }}</td>
+                    <td>{{ favorite.car.model }}</td>
+                    <td>{{ favorite.car.year }}</td>
+                    <td>{{ favorite.car.price }}</td>
+                    <td>
+                        <a href="{{ path('veh_details', {'id': favorite.car.id}) }}" class="btn btn-primary">View</a>
+                        <a href="{{ path('remove_from_favorites', {'id': favorite.id}) }}" class="btn btn-danger">Remove</a>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+{% endblock %}
